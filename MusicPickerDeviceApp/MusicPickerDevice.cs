@@ -14,12 +14,13 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MusicPickerDeviceApp.App;
 using MusicPickerDeviceApp.Properties;
 using LiteDB;
-using Microsoft.AspNet.SignalR.Client;
+using Quobject.SocketIoClientDotNet.Client;
 
 /// <summary>
 /// The MusicPickerDeviceApp namespace.
@@ -64,14 +65,8 @@ namespace MusicPickerDeviceApp
         /// The music player
         /// </summary>
         private Player player;
-        /// <summary>
-        /// The hub connection
-        /// </summary>
-        private HubConnection hubConnection;
-        /// <summary>
-        /// The hub proxy
-        /// </summary>
-        private IHubProxy hubProxy;
+
+        private Socket socket;
         /// <summary>
         /// The file watchers in order to be aware if a file is suppressed or added in the selected folders
         /// </summary>
@@ -96,11 +91,10 @@ namespace MusicPickerDeviceApp
 
             player = new Player(library);
 
-            client = new ApiClient(new Uri("http://localhost:50559"));
-            hubConnection = new HubConnection("http://localhost:50559");
-            hubProxy = hubConnection.CreateHubProxy("MusicHub");
+            client = new ApiClient(new Uri("http://localhost:3000"));
+            socket = IO.Socket("http://localhost:3000");
             HubClient hubClient = new HubClient(player);
-            hubClient.AttachToHub(hubProxy);
+            hubClient.AttachToSocket(socket);
         }
 
         /// <summary>
@@ -114,8 +108,6 @@ namespace MusicPickerDeviceApp
             {
                 menu.ShowAuthenticatedMenu(configuration.Model.DeviceName, false, Disconnect);
                 client.ProvideBearer(configuration.Model.Bearer);
-                hubConnection.Headers.Add("Authorization", "Bearer " + configuration.Model.Bearer);
-                await hubConnection.Start();
             }
             else
             {
@@ -124,7 +116,7 @@ namespace MusicPickerDeviceApp
 
             if (configuration.Model.Registered)
             {
-                player.AttachNextCallback(async () => await hubProxy.Invoke("Next", configuration.Model.DeviceId));
+                player.AttachNextCallback(() => socket.Emit("Next", configuration.Model.DeviceId));
                 await UpdateLibrary();
 
                 foreach (var path in configuration.Model.Paths)
@@ -132,7 +124,7 @@ namespace MusicPickerDeviceApp
                     fileWatchers.Add(new FileWatcher(path, AddTrack, DeleteTrack));
                 }
 
-                await hubProxy.Invoke("RegisterDevice", configuration.Model.DeviceId);
+                socket.Emit("RegisterDevice", configuration.Model.DeviceId);
             }
         }
 
@@ -213,10 +205,6 @@ namespace MusicPickerDeviceApp
                         ToolTipIcon.Info);
 
                     await UpdateLibrary();
-
-                    hubConnection.Headers.Add("Authorization", "Bearer " + configuration.Model.Bearer);
-                    await hubConnection.Start();
-                    await hubProxy.Invoke("RegisterDevice", configuration.Model.DeviceId);
                 }
             }
             else
@@ -231,8 +219,6 @@ namespace MusicPickerDeviceApp
         /// </summary>
         private void Disconnect()
         {
-            hubConnection.Headers.Remove("Authorization");
-            hubConnection.Stop();
             ResetConfiguration();
             menu.LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths);
             menu.SignUpForm = new SignUpForm(SignUp);
@@ -275,7 +261,7 @@ namespace MusicPickerDeviceApp
             {
                 await Task.Run(() => seeker.GetTracks(path));
             }
-
+            
             await client.DeviceCollectionSubmit(configuration.Model.DeviceId, library.Export());
             menu.ShowAuthenticatedMenu(configuration.Model.DeviceName, false, Disconnect);
         }
@@ -305,7 +291,6 @@ namespace MusicPickerDeviceApp
         /// </summary>
         public void Dispose()
         {
-            hubConnection.Stop();
             notifyIcon.Dispose();
         }
 

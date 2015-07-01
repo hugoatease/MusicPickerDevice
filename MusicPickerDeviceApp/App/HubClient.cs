@@ -12,7 +12,9 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using Microsoft.AspNet.SignalR.Client;
+
+using System;
+using Quobject.SocketIoClientDotNet.Client;
 
 /// <summary>
 /// The App namespace.
@@ -71,16 +73,12 @@ namespace MusicPickerDeviceApp.App
             player.SetTrack(current);
         }
 
-        /// <summary>
-        /// Attaches to hub.
-        /// </summary>
-        /// <param name="hub">The hub.</param>
-        public void AttachToHub(IHubProxy hub)
+        public void AttachToSocket(Socket socket)
         {
-            hub.On("Play", Play);
-            hub.On("Pause", Pause);
-            hub.On("Stop", Stop);
-            hub.On("SetTrackId", (id) => SetTrackId(id));
+            socket.On("Play", Play);
+            socket.On("Pause", Pause);
+            socket.On("Stop", Stop);
+            socket.On("SetTrackId", (id) => SetTrackId((string) id));
         }
     }
 }

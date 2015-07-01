@@ -1,15 +1,15 @@
 # MusicPickerDevice
 MusicPicker device client allows remote music playback and database collection on a computer or smart objects.
 Client scans its local music library, establishes connection with 
-[MusicPickerService](https://github.com/hutopi/MusicPickerService) and submit its metadata database.
+[MusicPicker](https://github.com/hugoatease/musicpicker) and submit its metadata database.
 
 MusicPickerDevice acts as a tray icon and provides user controls for service login, signup and music path's selection.
-Music is played in background, playback can be managed on [cloud service](http://musicpicker.cloudapp.net).
+Music is played in background, playback can be managed on [cloud service](http://nodepicker.cloudapp.net).
 
 Downloads
 ---------
-Precompiled binaries configured to access the [managed cloud service](http://musicpicker.cloudapp.net)
-are available on [Github Releases](https://github.com/hutopi/MusicPickerDevice/releases).
+Precompiled binaries configured to access the [managed cloud service](http://nodepicker.cloudapp.net)
+are available on [Github Releases](https://github.com/hugoatease/MusicPickerDevice/releases).
 
 Features
 ==========
@@ -41,9 +41,9 @@ Dependencies should be retrieved by calling Nuget's restore command.
 
 Change service URL
 ------------------
-Whereas [precompiled binaries](https://github.com/hutopi/MusicPickerDevice/releases) are built to
-reach the [managed webservice](http://musicpicker.cloudapp.net), source controlled app is configured to
-access service at [http://localhost:50559](http://localhost:50559), which is the default bind for MusicPickerService
+Whereas [precompiled binaries](https://github.com/hugoatease/MusicPickerDevice/releases) are built to
+reach the [managed webservice](http://nodepicker.cloudapp.net), source controlled app is configured to
+access service at [http://localhost:3000](http://localhost:3000), which is the default bind for MusicPickerService
 in source control.
 
 Service URL is bundled in MusicPickerDevice's source code, in *MusicPickerDevice.cs*. 
@@ -51,8 +51,8 @@ Service URL is bundled in MusicPickerDevice's source code, in *MusicPickerDevice
 You can change it to another URL as you need.
 
     player = new Player(library);
-    client = new ApiClient(new Uri("http://localhost:50559"));
-    hubConnection = new HubConnection("http://localhost:50559");
+    client = new ApiClient(new Uri("http://localhost:3000"));
+    hubConnection = new HubConnection("http://localhost:3000");
 
 License
 ===========

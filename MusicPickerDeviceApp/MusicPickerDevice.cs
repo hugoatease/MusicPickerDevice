@@ -108,6 +108,11 @@ namespace MusicPickerDeviceApp
             {
                 menu.ShowAuthenticatedMenu(configuration.Model.DeviceName, false, Disconnect);
                 client.ProvideBearer(configuration.Model.Bearer);
+                socket.Emit("authentication", configuration.Model.Bearer);
+                socket.On("authenticated", () =>
+                {
+                    socket.Emit("RegisterDevice", configuration.Model.DeviceId);
+                });
             }
             else
             {
@@ -123,8 +128,6 @@ namespace MusicPickerDeviceApp
                 {
                     fileWatchers.Add(new FileWatcher(path, AddTrack, DeleteTrack));
                 }
-
-                socket.Emit("RegisterDevice", configuration.Model.DeviceId);
             }
         }
 
@@ -205,6 +208,12 @@ namespace MusicPickerDeviceApp
                         ToolTipIcon.Info);
 
                     await UpdateLibrary();
+
+                    socket.Emit("authentication", configuration.Model.Bearer);
+                    socket.On("authenticated", () =>
+                    {
+                        socket.Emit("RegisterDevice", configuration.Model.DeviceId);
+                    });
                 }
             }
             else

@@ -32,7 +32,7 @@ It relies on the following dependencies to properly work:
 - [NAudio](https://github.com/naudio/NAudio) for music playback.
 - [LiteDB](https://github.com/mbdavid/LiteDB) for local metadata database.
 - [Taglib#](https://github.com/mono/taglib-sharp) for metadata reading.
-- [SignalR Client](https://github.com/SignalR/SignalR/) for realtime service communication.
+- [SocketIoClientDotNet](https://github.com/Quobject/SocketIoClientDotNet) for WebSocket communication.
 - [Json.NET](https://github.com/JamesNK/Newtonsoft.Json) for JSON (de)serialization.
 
 Dependencies should be retrieved by calling Nuget's restore command.
@@ -43,7 +43,7 @@ Change service URL
 ------------------
 Whereas [precompiled binaries](https://github.com/hutopi/MusicPickerDevice/releases) are built to
 reach the [managed webservice](http://musicpicker.cloudapp.net), source controlled app is configured to
-access service at [http://localhost:50559](http://localhost:50559), which is the default bind for MusicPickerService
+access service at [http://localhost:3000](http://localhost:3000), which is the default bind for MusicPickerService
 in source control.
 
 Service URL is bundled in MusicPickerDevice's source code, in *MusicPickerDevice.cs*. 
@@ -51,8 +51,8 @@ Service URL is bundled in MusicPickerDevice's source code, in *MusicPickerDevice
 You can change it to another URL as you need.
 
     player = new Player(library);
-    client = new ApiClient(new Uri("http://localhost:50559"));
-    hubConnection = new HubConnection("http://localhost:50559");
+    client = new ApiClient(new Uri("http://localhost:3000"));
+    hubConnection = new HubConnection("http://localhost:3000");
 
 License
 ===========

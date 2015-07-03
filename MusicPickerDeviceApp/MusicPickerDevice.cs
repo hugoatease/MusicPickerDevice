@@ -67,6 +67,7 @@ namespace MusicPickerDeviceApp
         private Player player;
 
         private Socket socket;
+        private HubClient hubClient;
         /// <summary>
         /// The file watchers in order to be aware if a file is suppressed or added in the selected folders
         /// </summary>
@@ -92,9 +93,20 @@ namespace MusicPickerDeviceApp
             player = new Player(library);
 
             client = new ApiClient(new Uri("http://localhost:3000"));
-            socket = IO.Socket("http://localhost:3000");
-            HubClient hubClient = new HubClient(player);
-            hubClient.AttachToSocket(socket);
+            hubClient = new HubClient(player);
+        }
+
+        private void socketInitialize()
+        {
+            if (configuration.Model.Registered)
+            {
+                socket.Emit("authentication", configuration.Model.Bearer);
+                socket.On("authenticated", () =>
+                {
+                    socket.Emit("RegisterDevice", configuration.Model.DeviceId);
+                });
+                hubClient.AttachToSocket(socket);
+            }
         }
 
         /// <summary>
@@ -108,11 +120,9 @@ namespace MusicPickerDeviceApp
             {
                 menu.ShowAuthenticatedMenu(configuration.Model.DeviceName, false, Disconnect);
                 client.ProvideBearer(configuration.Model.Bearer);
-                socket.Emit("authentication", configuration.Model.Bearer);
-                socket.On("authenticated", () =>
-                {
-                    socket.Emit("RegisterDevice", configuration.Model.DeviceId);
-                });
+                socket = IO.Socket("http://localhost:3000");
+                socketInitialize();
+                socket.On("reconnect", socketInitialize);
             }
             else
             {
@@ -209,11 +219,9 @@ namespace MusicPickerDeviceApp
 
                     await UpdateLibrary();
 
-                    socket.Emit("authentication", configuration.Model.Bearer);
-                    socket.On("authenticated", () =>
-                    {
-                        socket.Emit("RegisterDevice", configuration.Model.DeviceId);
-                    });
+                    socket = IO.Socket("http://localhost:3000");
+                    socketInitialize();
+                    socket.On("reconnect", socketInitialize);
                 }
             }
             else

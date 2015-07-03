@@ -39,6 +39,10 @@
       <HintPath>..\packages\EngineIoClientDotNet.0.9.17\lib\net45\EngineIoClientDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FlacBox, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4fc09ef1349866ee, processorArchitecture=MSIL">
+      <HintPath>..\packages\FlacBox.1.0.0\lib\net35\FlacBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LiteDB">
       <HintPath>..\packages\LiteDB.1.0.2\lib\net40\LiteDB.dll</HintPath>
     </Reference>

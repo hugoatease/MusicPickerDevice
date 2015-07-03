@@ -12,6 +12,9 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using System;
+using System.IO;
 using NAudio.Wave;
 
 /// <summary>
@@ -69,8 +72,25 @@ namespace MusicPickerDeviceApp.App
             LibraryTrack track = library.GetTrack(trackId);
             if (track != null)
             {
-                WaveStream stream = new AudioFileReader(track.Path);
-                waveOutDevice.Init(stream);
+                WaveStream stream;
+                if (Path.GetExtension(track.Path) == ".flac")
+                {
+                    var flac = new FlacBox.WaveOverFlacStream(new FlacBox.FlacReader(File.OpenRead(track.Path), false));
+                    stream = new RawSourceWaveStream(flac, new WaveFormat());
+                }
+                else
+                {
+                    stream = new MediaFoundationReader(track.Path);
+                }
+
+                try
+                {
+                    waveOutDevice.Init(stream);
+                }
+                catch
+                {
+                    nextCallback();
+                }
             }
             else
             {

@@ -81,7 +81,7 @@ namespace MusicPickerDeviceApp
             database = new LiteDatabase("musicpicker.db");
             configuration = new Configuration();
             library = new Library(database);
-            seeker = new Seeker(library, new[] { "mp3", "wav" });
+            seeker = new Seeker(library, new[] { "mp3", "wav", "m4a", "flac" });
             notifyIcon = new NotifyIcon();
             menu = new ContextMenus()
             {

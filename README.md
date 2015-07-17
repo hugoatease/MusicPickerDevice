@@ -1,15 +1,15 @@
 # MusicPickerDevice
 MusicPicker device client allows remote music playback and database collection on a computer or smart objects.
 Client scans its local music library, establishes connection with 
-[MusicPicker](https://github.com/hugoatease/musicpicker) and submit its metadata database.
+[Musicpicker](https://github.com/musicpicker/musicpicker) and submit its metadata database.
 
 MusicPickerDevice acts as a tray icon and provides user controls for service login, signup and music path's selection.
-Music is played in background, playback can be managed on [cloud service](http://nodepicker.cloudapp.net).
+Music is played in background, playback can be managed on [musicpicker.net](http://musicpicker.net).
 
 Downloads
 ---------
-Precompiled binaries configured to access the [managed cloud service](http://nodepicker.cloudapp.net)
-are available on [Github Releases](https://github.com/hugoatease/MusicPickerDevice/releases).
+Precompiled binaries configured to access [musicpicker.net](http://musicpicker.net)
+are available on [Github Releases](https://github.com/musicpicker/MusicPickerDevice/releases).
 
 Features
 ==========
@@ -19,7 +19,7 @@ MusicPickerDevice implements features essential to music playback and remote con
 - User account and device name switching
 - Multiple music library paths selection
 - Local database metadata caching
-- Support for MP3 and WAV files
+- Support for MP3, WAV and FLAC files
 - Database submission to webservice
 - Webservice remote control via SignalR
 
@@ -41,9 +41,9 @@ Dependencies should be retrieved by calling Nuget's restore command.
 
 Change service URL
 ------------------
-Whereas [precompiled binaries](https://github.com/hugoatease/MusicPickerDevice/releases) are built to
-reach the [managed webservice](http://nodepicker.cloudapp.net), source controlled app is configured to
-access service at [http://localhost:3000](http://localhost:3000), which is the default bind for MusicPickerService
+Whereas [precompiled binaries](https://github.com/musicpicker/MusicPickerDevice/releases) are built to
+reach [musicpicker.net](http://musicpicker.net), source controlled app is configured to
+access service at [http://localhost:3000](http://localhost:3000), which is the default bind for Musicpicker
 in source control.
 
 Service URL is bundled in MusicPickerDevice's source code, in *MusicPickerDevice.cs*. 
@@ -58,4 +58,4 @@ License
 ===========
 © 2015 Hugo Caille, Pierre Defache & Thomas Fossati. 
 
-MusicPicker is released upon the terms of the Apache 2.0 License.
+Musicpicker is released upon the terms of the Apache 2.0 License.

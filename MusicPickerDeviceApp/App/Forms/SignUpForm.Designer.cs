@@ -40,9 +40,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(110, 210);
+            this.button1.Location = new System.Drawing.Point(82, 171);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 31);
+            this.button1.Size = new System.Drawing.Size(56, 25);
             this.button1.TabIndex = 0;
             this.button1.Text = "Sign up";
             this.button1.UseVisualStyleBackColor = true;
@@ -50,60 +51,66 @@
             // 
             // Username
             // 
-            this.Username.Location = new System.Drawing.Point(63, 67);
+            this.Username.Location = new System.Drawing.Point(47, 54);
+            this.Username.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(166, 22);
+            this.Username.Size = new System.Drawing.Size(126, 20);
             this.Username.TabIndex = 1;
             // 
             // Password
             // 
-            this.Password.Location = new System.Drawing.Point(63, 125);
+            this.Password.Location = new System.Drawing.Point(47, 102);
+            this.Password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Password.Name = "Password";
             this.Password.PasswordChar = '*';
-            this.Password.Size = new System.Drawing.Size(166, 22);
+            this.Password.Size = new System.Drawing.Size(126, 20);
             this.Password.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(107, 47);
+            this.label1.Location = new System.Drawing.Point(80, 38);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 17);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Username";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 105);
+            this.label2.Location = new System.Drawing.Point(80, 85);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 17);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Password";
             // 
             // ConfirmPassword
             // 
-            this.ConfirmPassword.Location = new System.Drawing.Point(63, 182);
+            this.ConfirmPassword.Location = new System.Drawing.Point(47, 148);
+            this.ConfirmPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ConfirmPassword.Name = "ConfirmPassword";
             this.ConfirmPassword.PasswordChar = '*';
-            this.ConfirmPassword.Size = new System.Drawing.Size(166, 22);
+            this.ConfirmPassword.Size = new System.Drawing.Size(126, 20);
             this.ConfirmPassword.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(83, 162);
+            this.label3.Location = new System.Drawing.Point(62, 132);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 17);
+            this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Confirm password";
             // 
             // SignUpForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.ClientSize = new System.Drawing.Size(212, 206);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ConfirmPassword);
             this.Controls.Add(this.label2);
@@ -113,8 +120,9 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SignUpForm";
-            this.Text = "Music Picker - Sign up";
+            this.Text = "Musicpicker - Sign up";
             this.ResumeLayout(false);
             this.PerformLayout();
 

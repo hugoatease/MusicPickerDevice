@@ -108,7 +108,7 @@ namespace MusicPickerDeviceApp
 
             connectToolStrip = new ToolStripMenuItem()
             {
-                Text = "Connect",
+                Text = "Log in",
                 Image = Resources._in,
 
             };
@@ -132,13 +132,13 @@ namespace MusicPickerDeviceApp
 
             if (!uploading)
             {
-                AddMenu("Upload Music", 1, Resources.upload, Load_Click);
+                AddMenu("Scan Music", 1, Resources.upload, Load_Click);
             }
             else
             {
                 Menu.Items.Insert(1, new ToolStripMenuItem()
                 {
-                    Text = "Uploading...",
+                    Text = "Scanning...",
                     Enabled = false
                 });
             }
